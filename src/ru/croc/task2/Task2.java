@@ -27,7 +27,7 @@ public class Task2 {
         //сумма арифметической прогрессии
         int sum = 0;
 
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < c; i++){
             sum = sum + a;
             a = a + b;
         }

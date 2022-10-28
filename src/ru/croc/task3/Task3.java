@@ -1,28 +1,41 @@
 package ru.croc.task3;
 
+import java.text.DecimalFormat;
+import java.util.Scanner;
+
 /**
  * Программа вычисляет площадь треугольника по координатам его вершин
  */
 
-//вспомогательный класс для задания координат вершин
+
 public class Task3 {
+
+    //вспомогательный класс для задания координат вершин
     static class Point {
         double x;
         double y;
     }
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
         Point a = new Point();
-        a.x = -5.0;
-        a.y = -15.0;
+//        System.out.print("Input point A.x: ");
+        a.x = scanner.nextDouble();
+//        System.out.print("Input point A.y: ");
+        a.y = scanner.nextDouble();
 
         Point b = new Point();
-        b.x = -20.0;
-        b.y = -8.0;
+//        System.out.print("Input point B.x: ");
+        b.x = scanner.nextDouble();
+//        System.out.print("Input point B.y: ");
+        b.y = scanner.nextDouble();
 
         Point c = new Point();
-        c.x = -110.0;
-        c.y = -213.0;
+//        System.out.print("Input point C.x: ");
+        c.x = scanner.nextDouble();
+//        System.out.print("Input point C.y: ");
+        c.y = scanner.nextDouble();
+
 
         triangleArea(a, b, c);
     }
@@ -35,7 +48,9 @@ public class Task3 {
 
         double pp = (ab + bc + ac) / 2;
         double sqr = Math.sqrt(pp * (pp - ab) * (pp - bc) * (pp - ac));
-        System.out.printf("%.1f", sqr);
+        DecimalFormat df = new DecimalFormat("#.#");
+        String result = df.format(sqr);
+        System.out.print("Площадь треугольника: " + result);
 
     }
 }
