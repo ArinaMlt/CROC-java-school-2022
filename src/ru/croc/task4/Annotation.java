@@ -8,6 +8,13 @@ public class Annotation {
         this.figure = figure;
         this.name = name;
     }
+    public String getName(){
+        return name;
+    }
+
+    public Figure getFigure(){
+        return figure;
+    }
 
     @Override
     public String toString() {

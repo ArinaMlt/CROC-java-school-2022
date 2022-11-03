@@ -1,6 +1,6 @@
 package ru.croc.task4;
 
-public class Figure {
+public class Figure implements Movable{
     private String name;
     {
         name = "Figure";
@@ -20,6 +20,10 @@ public class Figure {
         return this.coordinates;
     }
 
+    public void setCoordinates(int... coordinates){
+        this.coordinates = coordinates;
+    }
+
     @Override
     public String toString() {
         String s = "";
@@ -28,5 +32,14 @@ public class Figure {
             s = s + coordinates[i] + ", ";
         }
         return name + " (" + s.substring(0, s.length() - 2) + ")";
+    }
+
+    /**
+     * Перемещение фигуры выбранной аннотации на смещение (dx, dy);
+     * 
+     */
+    @Override
+    public void move(int dx, int dy) {
+        //
     }
 }
