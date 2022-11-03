@@ -9,10 +9,7 @@ public class Figure {
 
     public Figure(String name, int... coordinates) {
         this.name = name;
-        this.coordinates = new int[coordinates.length];
-        for (int i = 0; i < coordinates.length; i++) {
-            this.coordinates[i] = coordinates[i];
-        }
+        this.coordinates = coordinates;
     }
 
     public String getName() {
