@@ -43,11 +43,13 @@ public class Task5 {
         Annotation a3 = new Annotation(new Rectangle(100, 100, 200, 200), "CarTop");
        
         Annotation testPoint = new Annotation(new Circle(0, 0, 5), "testPoint");
+        Annotation testPointCircle = new Annotation(new Circle(3, 3, 3), "testPointCircle");
+        
         Annotation testRectangle = new Annotation(new Rectangle(4, 1, 8, 3), "testRectangle");
 
         AnnotatedImage annotatedImage = new AnnotatedImage("purh", a3, a2, a1);
 
-        System.out.println(FindBy.point(-3, 3, a1,a2,a3, testPoint));
+        System.out.println(FindBy.point(1, 1, a1,a2,a3, testPointCircle));
         System.out.println(FindBy.point(5, 2, a1,a2,a3, testRectangle));
 
     }

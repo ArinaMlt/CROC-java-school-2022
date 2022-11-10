@@ -29,7 +29,7 @@ public final class FindBy {
                 // если длина гипотенузы меньше длины радису, то точка принадлжеит кругу
                 if (d < r) {
                     return annotations[i];
-                }
+                } 
             } else {
                 if (figure instanceof Rectangle) {
                     int x1 = coordinates[0];
