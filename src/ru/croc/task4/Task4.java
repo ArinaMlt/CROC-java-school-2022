@@ -11,6 +11,7 @@ package ru.croc.task4;
  * Вся разметка для изображения представляется массивом Annotation[].
  * 
  */
+
 public class Task4 {
 
     public static void main(String[] args) {

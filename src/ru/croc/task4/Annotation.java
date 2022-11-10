@@ -4,15 +4,16 @@ public class Annotation {
     private String name;
     private Figure figure;
 
-    Annotation(Figure figure, String name) {
+    public Annotation(Figure figure, String name) {
         this.figure = figure;
         this.name = name;
     }
-    public String getName(){
+
+    public String getName() {
         return name;
     }
 
-    public Figure getFigure(){
+    public Figure getFigure() {
         return figure;
     }
 

@@ -24,4 +24,12 @@ public class Circle extends Figure {
         int[] arr = getCoordinates();
         setCoordinates(arr[0] + dx, arr[1] + dy, arr[2]);
     }
+
+    /**
+     * принадлежит точка фигуре
+     */
+    public boolean point(int x, int y, Circle circle){
+
+        return false;
+    }
 }

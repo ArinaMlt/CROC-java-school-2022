@@ -1,5 +1,7 @@
 package ru.croc.task4;
 
+import ru.croc.task5.Movable;
+
 public class Figure implements Movable{
     private String name;
     {
