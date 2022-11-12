@@ -28,8 +28,18 @@ public class Circle extends Figure {
     /**
      * принадлежит точка фигуре
      */
-    public boolean point(int x, int y, Circle circle){
+    @Override
+    public boolean point(int x, int y) {
+        int[] coordinates = getCoordinates();
 
+        int x1 = coordinates[0];
+        int y1 = coordinates[1];
+        int r = coordinates[2];
+        double d = Math.sqrt(Math.pow((x1 - x), 2) + Math.pow((y1 - y), 2));
+        // если длина гипотенузы меньше длины радису, то точка принадлежит кругу
+        if (d < r) {
+            return true;
+        }
         return false;
     }
 }

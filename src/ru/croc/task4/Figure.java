@@ -2,7 +2,7 @@ package ru.croc.task4;
 
 import ru.croc.task5.Movable;
 
-public class Figure implements Movable{
+public abstract class Figure implements Movable{
     private String name;
     {
         name = "Figure";
@@ -38,10 +38,9 @@ public class Figure implements Movable{
 
     /**
      * Перемещение фигуры выбранной аннотации на смещение (dx, dy);
-     * 
      */
     @Override
-    public void move(int dx, int dy) {
-        //
-    }
+    public abstract void move(int dx, int dy);
+
+    public abstract boolean point(int x, int y);
 }
