@@ -29,7 +29,8 @@ public class Task6 {
 
             String s;
             while ((s = reader.readLine()) != null) {
-
+                s.indexOf("/*");
+        
                 if (s.length() > 0) {
                     for (int i = 0; i < s.toCharArray().length; i++) {
                         char[] c = s.toCharArray();
