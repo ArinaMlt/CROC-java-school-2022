@@ -1,6 +1,7 @@
 package ru.croc.task8;
 
 import java.text.NumberFormat;
+import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -15,11 +16,26 @@ public class Task8 {
     public static void main(String[] args) {
         Scanner Scanner = new Scanner(System.in);
         System.out.print("Enter a double: ");
-        Double prize = Scanner.nextDouble();
+        // Double prize = 0.0;
 
-        NumberFormat format = NumberFormat.getCurrencyInstance(Locale.KOREA);
+        try {
+            Double prize = Scanner.nextDouble();
+            NumberFormat format = NumberFormat.getCurrencyInstance(Locale.KOREA);
+            System.out.println("Result: " + format.format(prize));
 
-        System.out.println("Result: " + format.format(prize));
+            System.out.print("Enter a double: ");
+            prize = Scanner.nextDouble();
+            format = NumberFormat.getCurrencyInstance(Locale.CANADA);
+            System.out.println("Result: " + format.format(prize));
+
+            System.out.print("Enter a double: ");
+            prize = Scanner.nextDouble();
+            format = NumberFormat.getCurrencyInstance(Locale.FRANCE);
+            System.out.println("Result: " + format.format(prize));
+
+        } catch (InputMismatchException e) {
+            System.err.println(e.getMessage() + " invalid number");
+        }
 
     }
 }
