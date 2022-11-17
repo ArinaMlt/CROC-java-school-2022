@@ -22,41 +22,33 @@ public class Task6 {
     public static void main(String[] args) {
 
         String result = "";
-        boolean flag = true;
+        boolean flag = true; // в строке нет комментария
 
         try (BufferedReader reader = Files.newBufferedReader(Paths.get(
                 "/Users/arina/Downloads/CodeProjects/CROC-java-school-2022/src/ru/croc/task6/in.txt"))) {
 
             String s;
             while ((s = reader.readLine()) != null) {
-                s.indexOf("/*");
-        
-                if (s.length() > 0) {
-                    for (int i = 0; i < s.toCharArray().length; i++) {
-                        char[] c = s.toCharArray();
-                        if (flag) {
-                            if (c[i] == '/') {
-                                if (c[i + 1] == '/') {
-                                    result = result + "\n";
-                                    break;
-                                }
-                                if (c[i + 1] == '*') {
-                                    i++;
-                                    flag = false;
-                                }
-                            } else {
-                                result = result + c[i];
-                            }
-                        } else {
-                            if (c[i] == '/') {
-                                flag = true;
-                            }
-                        }
-                    }
-
-                } else {
-                    result = "\n";
+                int i, end;
+                if ((i = s.indexOf("/*")) != -1) {
+                    System.out.println("i: " + i);
+                    flag = false;
+                    result = result + "\n" + s.substring(0, i);
                 }
+
+                if ((end = s.indexOf("*/")) != -1) {
+                    flag = false;
+                    System.out.println("end: " + end);
+                    result = result + s.substring(end + 2, s.length()) + "\n";
+                }
+
+                if ((i = s.indexOf("//")) != -1) {
+                    result = result + s.substring(0, i) + "\n";
+                    flag = false;
+                }
+
+                if (flag)
+                    result = result + s + "\n";
 
                 File file = new File(
                         "/Users/arina/Downloads/CodeProjects/CROC-java-school-2022/src/ru/croc/task6/out.txt");
@@ -74,7 +66,6 @@ public class Task6 {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-
     }
 
 }
