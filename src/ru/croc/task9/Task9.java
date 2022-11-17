@@ -26,6 +26,7 @@ public class Task9 {
         // System.out.print("Введите входные данные для программы: ");
         // String password = scanner.nextLine();
         // System.out.println("");
+    
         System.out.print("Введите хэш: ");
         String hash = scanner.nextLine();
 
