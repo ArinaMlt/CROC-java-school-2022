@@ -23,13 +23,13 @@ public class Task9 {
     public static void main(String[] args) throws InterruptedException {
 
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Введите входные данные для программы: ");
-        String password = scanner.nextLine();
-        System.out.println("");
+        // System.out.print("Введите входные данные для программы: ");
+        // String password = scanner.nextLine();
+        // System.out.println("");
         System.out.print("Введите хэш: ");
         String hash = scanner.nextLine();
 
-        EnumerationRunnable er1 = new EnumerationRunnable(password, hash);
+        EnumerationRunnable er1 = new EnumerationRunnable("aaaaaaa", hash);
         Thread t1 = new Thread(er1);
         Thread t2 = new Thread(new EnumerationRunnable("ccccccc", hash));
         Thread t3 = new Thread(new EnumerationRunnable("fffffff", hash));
