@@ -15,71 +15,38 @@ public class ChessCheck {
      * 
      * @param chess - массив объектов класса, определенных в текущей задаче.
      */
-    public static void horse(Chess... chess) {
+    public static void knight(Chess... chess) {
         boolean flag = true;
         int startX = chess[0].getX();
         int startY = chess[0].getY();
-        if (chess.length == 2) {
+        for (int i = 1; i < chess.length; i++) {
 
-            int endX = chess[1].getX();
-            int endY = chess[1].getY();
+            int endX = chess[i].getX();
+            int endY = chess[i].getY();
 
             try {
-                if (!ch(startX, startY, endX, endY))
-                    throw new IllegalMoveException(chess[0], chess[1]);
-
+                if (!check(startX, startY, endX, endY))
+                    throw new IllegalMoveException(chess[i - 1], chess[i]);
+                else {
+                    startX = endX;
+                    startY = endY;
+                }
             } catch (IllegalMoveException e) {
-                // System.out.println(e.getMessage());
                 flag = false;
             }
-
-        } else {
-            for (int i = 1; i < chess.length; i++) {
-                // int startX = chess[0].getX();
-                // int startY = chess[0].getY();
-
-                int endX = chess[i].getX();
-                int endY = chess[i].getY();
-
-                try {
-                    if (!ch(startX, startY, endX, endY))
-                        throw new IllegalMoveException(chess[i - 1], chess[i]);
-                    else {
-                        startX = endX;
-                        startY = endY;
-                    }
-                } catch (IllegalMoveException e) {
-                    // System.out.println(e.getMessage());
-                    flag = false;
-                }
-
-                // try {
-
-                // if (((endX == startX + 2) && ((endY == startY + 1) || (endY == startY - 1)))
-                // ||
-                // ((endX == startX - 2) && ((endY == startY + 1) || (endY == startY - 1))) ||
-                // ((endY == startY - 2) && ((endX == startX + 1) || (endX == startX - 1))) ||
-                // ((endY == startY + 2) && ((endX == startX + 1) || (endX == startX - 1))))
-                // return true;
-                // else
-                // throw new IllegalMoveException(chess[i], chess[i + 1]);
-                // } catch (IllegalMoveException e) {
-                // System.out.println(e.getMessage());
-                // }
-
-            }
         }
-        if(flag) System.out.println("OK");
-
-        // return true;
+        if (flag)
+            System.out.println("OK");
     }
 
-    private static boolean ch(int startX, int startY, int endX, int endY) {
+    private static boolean check(int startX, int startY, int endX, int endY) {
 
-        if (((endX == startX + 2) && ((endY == startY + 1) || (endY == startY - 1))) ||
-                ((endX == startX - 2) && ((endY == startY + 1) || (endY == startY - 1))) ||
-                ((endY == startY - 2) && ((endX == startX + 1) || (endX == startX - 1))) ||
-                ((endY == startY + 2) && ((endX == startX + 1) || (endX == startX - 1))))
+        final boolean isGoingRirght = ((endX == startX + 2) && ((endY == startY + 1) || (endY == startY - 1)));
+        final boolean isGoingLeft = ((endX == startX - 2) && ((endY == startY + 1) || (endY == startY - 1)));
+        final boolean isGoingUp = ((endY == startY + 2) && ((endX == startX + 1) || (endX == startX - 1)));
+        final boolean isGoingDown = ((endY == startY - 2) && ((endX == startX + 1) || (endX == startX - 1)));
+
+        if (isGoingDown || isGoingUp || isGoingLeft || isGoingRirght)
             return true;
         else
             return false;
