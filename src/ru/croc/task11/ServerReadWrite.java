@@ -24,6 +24,8 @@ public class ServerReadWrite extends Thread {
         String word;
         try {
 
+            out.write("Привет, это Сервер! \n");
+                out.flush();
             while (true) {
                 word = in.readLine(); 
 
@@ -32,7 +34,7 @@ public class ServerReadWrite extends Thread {
                     break;
                 }
 
-                out.write("Привет, это Сервер! Подтверждаю, вы написали : " + word + "\n");
+                out.write("From SERVER : " + word + "\n");
                 out.flush();
                 System.out.println("Echo: " + word);
 

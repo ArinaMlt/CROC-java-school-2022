@@ -9,6 +9,8 @@ import java.net.Socket;
  */
 public class Client {
 
+    private String name;
+
     private static Socket socket;
     private static BufferedReader reader;
 
@@ -19,19 +21,21 @@ public class Client {
 
         try {
             this.socket = new Socket(addr, port);
+
+            BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println("Введите имя пользователя: ");
+            name = bf.readLine();
+
         } catch (IOException e) {
             System.err.println("Socket failed");
         }
-        try {
 
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+        new ClientRead(socket).start();
+        new ClientWrite(socket, name).start();
 
-            //потоки чтения/записи
+        // in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        // out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 
-        } catch (IOException e) {
-            Client.this.down();
-        }
 
     }
 
