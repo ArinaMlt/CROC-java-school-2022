@@ -56,9 +56,9 @@ public class Task9 {
         char a = 97; // 'a'
         for (int i = 0; i < n; i++) {
             String s = (Character.toString(a).repeat(c));
-            new EnumerationRunnable(s, hash).start();
+            Thread t = new Thread(new EnumerationRunnable(s, hash));
+            t.start();
 
-            // System.out.println(s);
             a = (char) (a + (26 / n));
         }
 

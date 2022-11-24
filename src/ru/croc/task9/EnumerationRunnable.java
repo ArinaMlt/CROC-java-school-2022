@@ -3,7 +3,7 @@ package ru.croc.task9;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class EnumerationRunnable extends Thread {
+public class EnumerationRunnable implements Runnable {
 
     private static volatile boolean cancelled = false;
 
@@ -44,7 +44,7 @@ public class EnumerationRunnable extends Thread {
 
     @Override
     public void run() {
-        System.out.println(result);
+        // System.out.println(result);
         System.out.println(enumerate());
 
     }
