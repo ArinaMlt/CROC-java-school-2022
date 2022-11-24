@@ -3,10 +3,16 @@ package ru.croc.task9;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class EnumerationRunnable implements Runnable {
+public class EnumerationRunnable extends Thread {
 
-    private static String result;
-    private static String hash;
+    private static volatile boolean cancelled = false;
+
+    public void cancel() {
+            cancelled = true;
+    }
+
+    private String result;
+    private String hash;
 
     public EnumerationRunnable(String result, String hash) {
         this.result = result;
@@ -38,12 +44,12 @@ public class EnumerationRunnable implements Runnable {
 
     @Override
     public void run() {
-        // TODO Auto-generated method stub
+        System.out.println(result);
         System.out.println(enumerate());
 
     }
 
-    private static String enumerate() {
+    private String enumerate() {
 
         char[] c = result.toCharArray(); // преобразовать строчку в массив символов
         int size = c.length;
@@ -55,10 +61,11 @@ public class EnumerationRunnable implements Runnable {
             c[i] = 'a';
         }
 
-        outer: while (true) { // вечный цикл
+        outer: while (!cancelled) { // вечный цикл
 
             // проверить хэш
             if ((hashPassword(result).equals(hash.toUpperCase()))) {
+                cancel();
                 return result;
             }
 
@@ -68,7 +75,7 @@ public class EnumerationRunnable implements Runnable {
                 result = result + (char) (c[i] + arr[i]);
             }
 
-            // System.out.print(result);
+            // System.out.println(result);
             // System.out.println();
 
             int i = size - 1;// ставим курсов в самую правую ячейку
@@ -83,4 +90,5 @@ public class EnumerationRunnable implements Runnable {
         }
         return null;
     }
+
 }

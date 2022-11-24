@@ -1,4 +1,7 @@
 package ru.croc.task9;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -21,32 +24,43 @@ import java.util.Scanner;
 public class Task9 {
 
     public static void main(String[] args) throws InterruptedException {
+        // d9d7dbddc29177b121a6aa1bb09d15fd (bab)
+        // D9D7DBDDC29177B121A6AA1BB09D15FD
 
+        // (abcdefg)
+        // 7AC66C0F148DE9519B8BD264312C4D64
+        // 7
+
+        // aaaaaag
+        // EB1CD3F4A42A865D119B378A7C004E30
+        // 7
+
+        // ffffffd
+        // 9DA6B5CFAAEAB84A524DB43622E7036F
+        // 7
+
+        // fffd
+        // 8E97F5134D1C78658F1E70A6D1BEBEDE
+        // 4
         Scanner scanner = new Scanner(System.in);
-        // System.out.print("Введите входные данные для программы: ");
-        // String password = scanner.nextLine();
-        // System.out.println("");
-    
-        System.out.print("Введите хэш: ");
+
+        System.out.print("Введите hash: ");
         String hash = scanner.nextLine();
 
-        EnumerationRunnable er1 = new EnumerationRunnable("aaaaaaa", hash);
-        Thread t1 = new Thread(er1);
-        Thread t2 = new Thread(new EnumerationRunnable("ccccccc", hash));
-        Thread t3 = new Thread(new EnumerationRunnable("fffffff", hash));
+        System.out.print("Введите количество символов в пароле: ");
+        int c = scanner.nextInt();
 
-        Thread t4 = new Thread(new EnumerationRunnable("jjjjjjj", hash));
-        Thread t5 = new Thread(new EnumerationRunnable("mmmmmmm", hash));
-        Thread t6 = new Thread(new EnumerationRunnable("sssssss", hash));
-        Thread t7 = new Thread(new EnumerationRunnable("wwwwwww", hash));
+        System.out.print("Введите количество потоков: ");
+        int n = scanner.nextInt();
 
-        t1.start();
-        t2.start();
-        t3.start();
-        t4.start();
-        t5.start();
-        t6.start();
-        t7.start();
+        char a = 97; // 'a'
+        for (int i = 0; i < n; i++) {
+            String s = (Character.toString(a).repeat(c));
+            new EnumerationRunnable(s, hash).start();
+
+            // System.out.println(s);
+            a = (char) (a + (26 / n));
+        }
 
     }
 }
