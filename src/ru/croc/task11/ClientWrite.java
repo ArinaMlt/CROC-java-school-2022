@@ -30,13 +30,15 @@ public class ClientWrite extends Thread {
                     out.flush();
                     out.close();
                     ClientWrite.socket.close();
+                } else {
+                    out.write(name + ": " + word + "\n");
+                    out.flush();
                 }
-                out.write(name + ": " + word + "\n");
-                out.flush();
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
+            System.out.println("Сервер закрыт ");
         }
 
     }

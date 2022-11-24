@@ -24,6 +24,7 @@ public class ClientRead extends Thread {
                 String serverWord = in.readLine();
                 if (serverWord.equals("exit")) {
                     in.close();
+                    socket.getInputStream().close();
                     ClientRead.socket.close();
                     break;
                 }
@@ -31,7 +32,8 @@ public class ClientRead extends Thread {
             }
 
         } catch (IOException e1) {
-            e1.printStackTrace();
+            // e1.printStackTrace();
+            System.out.println("Сервер закрыт ");
         }
 
     }
