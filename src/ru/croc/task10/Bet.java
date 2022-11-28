@@ -25,25 +25,25 @@ public class Bet implements Runnable {
     @Override
     public void run() {
         time = lot.getTime();
-        System.out.println("Аукцион открыт.");
+        // System.out.println("Аукцион открыт.");
 
         while (time.isAfter(LocalDateTime.now())) {
             nowPrice = lot.getPrice();
             if (nowPrice > price) {
-                System.out.println("текущая ставка: " + nowPrice);
-                System.out.println(name + ", введите Вашу ставку: ");
-                price = scanner.nextInt();
+                // System.out.println("текущая ставка: " + nowPrice);
 
-                while (!lot.rates(price, name)) {
-                    System.out.println("ставка не принята, введите Вашу ставку: ");
-                    price = scanner.nextInt();
-                }
+                // System.out.println(name + ", введите Вашу ставку: ");
+                // price = scanner.nextInt();
+                price = nowPrice + 1;
+                lot.rates(price, name);
+
+                // while (!lot.rates(price, name)) {
+                // System.out.println("ставка не принята, введите Вашу ставку: ");
+                // // price = scanner.nextInt();
+                // price = nowPrice + 2;
+                // }
             }
-
         }
-        System.out.println("Аукцион закрыт.");
-        System.out.println("Выиграла ставка - " + lot.getName());
-
     }
 
 }

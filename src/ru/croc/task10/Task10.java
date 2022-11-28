@@ -21,12 +21,24 @@ public class Task10 {
         System.out.println(closeLot);
         Lot one = new Lot(1, closeLot);
 
-        Bet bet = new Bet(one, "catTom");
+        Bet betOne = new Bet(one, "catTom");
+        Bet betTwo = new Bet(one, "dogJack");
+        Bet betThree = new Bet(one, "frogNik");
 
-        Thread bet1 = new Thread(bet);
+        Thread bet1 = new Thread(betOne);
+        Thread bet2 = new Thread(betTwo);
+        Thread bet3 = new Thread(betThree);
 
         bet1.start();
+        bet2.start();
+        bet3.start();
 
+        System.out.println("Аукцион открыт.");
+
+        while ((one.getTime()).isAfter(LocalDateTime.now())) {
+        }
+        System.out.println("Аукцион закрыт");
+        System.out.println("Выиграла ставка - " + one.getName() + " " + one.getPrice());
     }
 
 }

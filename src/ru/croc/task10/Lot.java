@@ -16,6 +16,8 @@ public class Lot {
     private volatile String name;
     private LocalDateTime time;
 
+    private static final Object lock = new Object();
+
     public Lot(int price, LocalDateTime time) {
         this.price = price;
         this.time = time;
@@ -27,19 +29,21 @@ public class Lot {
      * если торги по лоту еще ведутся по времени и предложенная цена выше текущей.
      */
     public boolean rates(int price, String name) {
-        if (time.isAfter(LocalDateTime.now())) {
-            if (this.price < price) {
-                this.name = name;
-                this.price = price;
-                System.out.println(LocalDateTime.now() + " Ставка принята от: " + name + " ставка: " + price);
-                return true;
+        synchronized (lock) {
+            if (time.isAfter(LocalDateTime.now())) {
+                if (this.price < price) {
+                    this.name = name;
+                    this.price = price;
+                    System.out.println(LocalDateTime.now() + " Ставка принята от: " + name + " ставка: " + price);
+                    return true;
+                } else {
+                    System.out.println("rate should be higher ");
+                    return false;
+                }
             } else {
-                System.out.println("rate should be higher ");
+                System.out.println("время вышло");
                 return false;
             }
-        } else {
-            System.out.println("время вышло");
-            return false;
         }
     }
 
