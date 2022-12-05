@@ -4,12 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+// import java.util.ArrayList;
+import java.util.*;
+// import java.util.HashMap;
+// import java.util.List;
+// import java.util.Map;
+// import java.util.Scanner;
 
 /**
  * Кинотеатр "Места для поцелуев" открыл стриминговый сервис для
@@ -68,124 +68,29 @@ import java.util.Scanner;
  */
 public class Task13 {
     public static void main(String[] args) {
-
-        // запись из файла в карту
-        Map<Integer, String> films = new HashMap<>();
-        try (BufferedReader reader = Files.newBufferedReader(Paths.get(
-                "/Users/arina/Downloads/CodeProjects/CROC-java-school-2022/src/ru/croc/task13/films.txt"))) {
-            String s;
-            while ((s = reader.readLine()) != null) {
-                String[] arrayS = s.split(",");
-                Integer i = Integer.valueOf(arrayS[0]);
-                films.put(i, arrayS[1]);
-            }
-            System.out.println(films);
-
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-        // пользователи
-        Map<Integer, ArrayList<Integer>> users = new HashMap<>();
-        try (BufferedReader reader = Files.newBufferedReader(Paths.get(
-                "/Users/arina/Downloads/CodeProjects/CROC-java-school-2022/src/ru/croc/task13/out.txt"))) {
-            String s;
-            int i = 0; // коэффициент для уникального идентификатора пользователя
-            while ((s = reader.readLine()) != null) {
-                String[] splLine = s.split(",");
-                List<Integer> views = new ArrayList<>();
-                for (String s1 : splLine) {
-                    views.add(Integer.valueOf(s1));
-                }
-                users.put(i, (ArrayList<Integer>) views);
-                i++;
-            }
-            System.out.println(users);
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-        // пользователь вводит свои просмотры
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите свой список фильмов: ");
-        String user = scanner.nextLine();
-        String[] userViewsSplit = user.replaceAll("\\s+", "").split(",");
-
-        // просмотры пользователя
-        ArrayList<Integer> userViews = new ArrayList<>();
-        for (String s : userViewsSplit) {
-            userViews.add(Integer.valueOf(s));
-        }
-
-        // сэт фильмов для рекмендации пользователю
-        List<Integer> movies = new ArrayList<>();
-
-        // найти пользователей с >=50% совпадением фильмов
-        for (ArrayList<Integer> view : users.values()) {
-            int index = 0;
-            int size = view.size();// сколько фильмов посмотрел пользователь
-            for (int i : userViews) {
-                System.out.println("i:" + i);
-                if (view.indexOf(i) != -1) {
-                    index++;
-                    System.out.println("index: " + index);
-                }
-            }
-
-            // записать подходящие просмотры пользователелй
-            if (((index * 100) / size) >= 50) {
-                for (Integer i : view) {
-                    if (movies.indexOf(i) == -1) {
-                        movies.add(i);
-                    }
-                }
-            }
-
-        }
-
-        System.out.println(movies);
-
-        // удалить из списка все фильмы, которые пользователь уже видел
-        for (Integer view : userViews) {
-            if (movies.indexOf(view) != -1) {
-                movies.remove(view);
-            }
-        }
-
-        // посчитать суммарное число просмотров среди всех пользователей
-        Map<Integer, Integer> recomendation = new HashMap<>();
-        Integer key;
-        for (ArrayList<Integer> view : users.values()) {
-            for (Integer v : view) {
-                for (Integer movie : movies) {
-                    if (movie == v) {
-                        if ((key = recomendation.get(movie)) != null) {
-                            key++;
-                            recomendation.put(v, key);
-                        } else {
-                            recomendation.put(v, 1);
-                        }
-                    }
-                }
-            }
-        }
-
-        System.out.println("movies " + movies);
-
-        System.out.println("recomendation: " + recomendation);
-
-        int maxValueInMap = (Collections.max(recomendation.values()));
-        System.out.println("max: " + maxValueInMap);
-
-        Integer result = 0;
-        for (java.util.Map.Entry<Integer, Integer> entry : recomendation.entrySet()) {
-            if (entry.getValue() == maxValueInMap) {
-                result = entry.getKey();
-            }
-        }
-
-        System.out.println("Рекомендуем следующий фильм: " + films.get(result));
-
+         // пользователь вводит свои просмотры
+         Scanner scanner = new Scanner(System.in);
+         System.out.println("Введите свой список фильмов: ");
+         // String user = scanner.nextLine();
+         String user = "2, 4"; // FOR TEST!!!!
+         System.out.println(user);// FOR TEST!!!!
+         String[] userViewsSplit = user.replaceAll("\\s+", "").split(",");
+         List<Film> viuwsUsers = new ArrayList<>();
+         List<Film> films = Data.films();
+         Film film;
+         for (String s1 : userViewsSplit) {
+             for (Film f : films) {
+                 if (f.getId().equals(Integer.valueOf(s1))) {
+                     film = f;
+                     viuwsUsers.add(film);
+                 }
+             }
+         }
+         User user2 = new User(0, viuwsUsers);
+ 
+         // time for recommendation
+         Recommendation rec = new Recommendation(user2);
+         rec.recomend();
     }
 
 }
