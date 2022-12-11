@@ -1,13 +1,8 @@
 package ru.croc.task14;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -48,33 +43,34 @@ import java.util.function.Predicate;
 public class Task14 {
     public static void main(String[] args) {
 
-        List<String> list = new ArrayList<>();
-        list.add("One, comment in, list one 1");
-        list.add("Two comment in list two 2!");
-        list.add("Three comment in list three 3");
-        list.add("Four comment in list four 4");
-        list.add("test comment in list test 5");
-        list.add("Five comment in list five 5");
+        List<String> comments = new ArrayList<>();
+        comments.add("One, comment in, list one 1");
+        comments.add("Two comment in list two 2!");
+        comments.add("Three comment in list three 3");
+        comments.add("Four comment in list four 4");
+        comments.add("test comment in list test 5");
+        comments.add("Five comment in list five 5");
 
-        Set<String> set = new HashSet<>();
-        set.add("one");
-        set.add("two");
-        set.add("three");
-        set.add("four");
-        set.add("five");
+        Set<String> badWords = new HashSet<>();
+        badWords.add("one");
+        badWords.add("two");
+        badWords.add("three");
+        badWords.add("four");
+        badWords.add("five");
 
         Predicate<String> predicate = comment -> {
             String[] words = comment.toLowerCase().split(" ");
             for (String w : words) {
-                if (set.contains(w)) {
+                if (badWords.contains(w)) {
                     return true;
                 }
             }
             return false;
         };
 
-        BlackListFilter<String> filter = new BlackListFilter<>() {};
-        List<String> result = (List<String>) filter.filterComments(list, predicate);
+        BlackListFilter<String> filter = new BlackListFilter<>() {
+        };
+        List<String> result = (List<String>) filter.filterComments(comments, predicate);
         for (String str : result) {
             System.out.println(str);
         }
