@@ -12,13 +12,13 @@ public class DAO {
      * @return времени доставки всех его заказов вместе с именами курьеров, которые
      *         эти заказы выполняют
      */
-    public void findAllOrdersofCourier(String id) {
+    public void findAllOrdersofCourier(int id) {
         try (Connection conn = DriverManager.getConnection("jdbc:h2:~/test", "sa", "")) {
             final Statement statement = conn.createStatement();
             try (ResultSet result = statement
                     .executeQuery(
-                            "select time, courier.name from orders join courier on COURIERNUMBER=EMPLOYEENUMBER  where login='"
-                                    + id + "'")) {
+                            "select time, courier.name from orders join courier on COURIERNUMBER=EMPLOYEENUMBER  where userid="
+                                    + id + "")) {
                 while (result.next()) {
                     System.out.println("Time: " + result.getString("time"));
                     System.out.println("Courier: " + result.getString("name"));
@@ -34,13 +34,17 @@ public class DAO {
         }
     }
 
+    /**
+     * Получение по id курьера всех заказов, которые ему нужно доставить (вместе с именами получателей).
+     * @param id - курьера
+     */
     public void findByCourier(int id) {
         try (Connection conn = DriverManager.getConnection("jdbc:h2:~/test", "sa", "")) {
             final Statement statement = conn.createStatement();
             try (ResultSet result = statement
-                    .executeQuery("select login,time,product from orders where couriernumber=" + id + "")) {
+                    .executeQuery("select users.name,time,product from orders join users on iduser=userid where couriernumber=" + id + "")) {
                 while (result.next()) {
-                    System.out.println("Name: " + result.getString("login"));
+                    System.out.println("Name: " + result.getString("name"));
                     System.out.println("Time: " + result.getString("time"));
                     System.out.println("Product: " + result.getString("product"));
                     System.out.println("------------------");
