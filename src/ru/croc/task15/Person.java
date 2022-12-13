@@ -7,6 +7,9 @@ public class Person {
     private int age;
 
     public Person(String name, int age) {
+        if (age > 123 || name.isEmpty()) {
+            throw new IllegalArgumentException("Введены неверные данные");
+        }
         this.name = name;
         this.age = age;
     }
@@ -24,17 +27,14 @@ public class Person {
         return name + " (" + age + ") ";
     }
 
-    public static final Comparator<Person> COMPARE = new Comparator<Person>() {
-        @Override
-        public int compare(Person p1, Person p2) {
-            if (p1.getAge() == p2.getAge())
-                return p1.getName().compareTo(p2.getName());
-            else {
-                if (p1.getAge() < p2.getAge())
-                    return 1;
-                else
-                    return -1;
-            }
+    public static final Comparator<Person> COMPARE = (p1, p2) -> {
+        if (p1.getAge() == p2.getAge())
+            return p1.getName().compareTo(p2.getName());
+        else {
+            if (p1.getAge() < p2.getAge())
+                return 1;
+            else
+                return -1;
         }
     };
 

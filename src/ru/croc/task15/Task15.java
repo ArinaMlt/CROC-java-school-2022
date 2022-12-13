@@ -17,33 +17,49 @@ import java.util.*;
  */
 public class Task15 {
     public static void main(String[] args) {
-        System.out.println("Введи возрастные группы: ");
+        if (args.length == 0) {
+            throw new NullPointerException("! Укажите возрастные группы !");
+        } else {
 
-        List<Person> allPeople = Arrays.asList(
-                new Person("Кошельков Захар Брониславович", 105),
-                new Person("Иванов Варлам Якунович", 88),
-                new Person("Дьячков Нисон Иринеевич ", 88),
-                new Person("Старостин Ростислав Ермолаевич", 50),
-                new Person("Ярилова Розалия Трофимовна", 29),
-                new Person("Егоров Алан Петрович", 7),
-                new Person("Соколов Андрей Сергеевич", 15));
-        // new Person("Егоров Алан Петрович", 7));
+            // тест
+            /*
+             * 18 25 35 45 60 80 100
+             * 
+             * Кошельков Захар Брониславович,105
+             * Дьячков Нисон Иринеевич,88
+             * Иванов Варлам Якунович,88
+             * Старостин Ростислав Ермолаевич,50
+             * Ярилова Розалия Трофимовна,29
+             * Соколов Андрей Сергеевич,15
+             * Егоров Алан Петрович,7
+             * 
+             */
 
-        List<Integer> ages = new LinkedList<>();
-        Scanner scanner = new Scanner(System.in);
-        String s = scanner.nextLine();
+            Scanner scanner = new Scanner(System.in);
+            String user;
+            List<String[]> allPeople = new ArrayList<>();
+            System.out.println("Введите <ФИО>,<возраст>, после окончания ввода введите 'STOP'");
 
-        String[] s1 = s.split(" ");
+            do {
+                user = scanner.nextLine();
+                if (!user.equals("STOP")) {
+                    allPeople.add(user.split(","));
+                }
+            } while (!user.equals("STOP"));
 
-        for (String s2 : s1) {
-            ages.add(Integer.valueOf(s2));
+            GroupsAge groupsAge = new GroupsAge(allPeople, args);
+            System.out.println(groupsAge);
+
+            /*
+             * 
+             * 101 + Кошельков Захар Брониславович (105)
+             * 81 - 100: Дьячков Нисон Иринеевич (88) Иванов Варлам Якунович (88)
+             * 46 - 60: Старостин Ростислав Ермолаевич (50)
+             * 26 - 35: Ярилова Розалия Трофимовна (29)
+             * 0 - 18:Соколов Андрей Сергеевич (15) Егоров Алан Петрович (7)
+             */
+
         }
-
-        GroupsAge groupsAge = new GroupsAge(allPeople, ages);
-        // groupsAge.groupOfAge();
-        // groupsAge.sortList();
-        System.out.println(groupsAge);
-
     }
 
 }
