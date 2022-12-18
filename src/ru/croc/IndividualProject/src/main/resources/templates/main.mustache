@@ -1,0 +1,29 @@
+<html>
+<head>
+<style>
+</style>
+</head>
+<body>
+<div>
+        <form action="/logout" method="post">
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
+    <div>
+        <form method="post">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+        <p>Введите предложение на английском: </p>
+            <input type="text" name="text" placeholder="ing" />
+            <button type="submit">Перевести</button>
+        </form>
+    </div>
+    <div>Перевод</div>
+    {{#words}}
+    <div>
+    <div>{{text}} - {{translatedText}} </div>
+
+    </div>
+    {{/words}}
+</body>
+</html>
